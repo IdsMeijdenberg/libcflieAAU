@@ -30,8 +30,12 @@
 #ifndef CLOCKGETTIME_H_INCLUDED
 #define CLOCKGETTIME_H_INCLUDED
 
+#pragma comment (lib, "Ws2_32.lib")
+#pragma comment (lib, "Mswsock.lib")
+#pragma comment (lib, "AdvApi32.lib")
+
 #ifdef _WIN32
-	#include <Windows.h>
+	//#include <Windows.h>
 #endif
  
 #define NSEC_PER_SEC 1000000000L
