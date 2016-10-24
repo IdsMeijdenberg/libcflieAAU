@@ -157,6 +157,9 @@ class CCrazyflie {
 
   void enableMotorLogging();
   void disableMotorLogging();
+  
+  void enableSMRM_rollLogging();
+  void disableSMRM_rollLogging();
 
   void enableExtPosLogging();
   void disableExtPosLogging();
@@ -356,6 +359,14 @@ class CCrazyflie {
   float actuatorPitch();
   float actuatorYaw();
 
+  uint32_t SMRM_rollTimestamp();
+  double SMRM_rollLocalTimestamp();
+  bool SMRM_rollNewData();
+  float SMRM_rollX_hat();
+  float SMRM_rollV_hat();
+  float SMRM_rollTh_hat();
+  float SMRM_rollOm_hat();
+  
   uint32_t extPosTimestamp();
   double extPosLocalTimestamp();
   bool extPosNewData();
