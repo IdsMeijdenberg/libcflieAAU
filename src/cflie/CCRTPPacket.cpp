@@ -30,7 +30,7 @@
 /* Original Author: Jan Winkler */
 /* Modifications by: Luminita C. Totu, Aalborg University */
 
-#include "cflie/CCRTPPacket.h"
+#include "CCRTPPacket.h"
 
 
 CCRTPPacket::CCRTPPacket(int nPort) {

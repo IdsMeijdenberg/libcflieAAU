@@ -27,7 +27,7 @@
 
 /* Author: Luminita C. Totu, Aalborg University */
 
-#include "cflie/clockgettime.h"
+#include "clockgettime.h"
 
 #ifdef _WIN32
 	LARGE_INTEGER

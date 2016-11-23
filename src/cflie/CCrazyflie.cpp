@@ -31,8 +31,8 @@
 /* Modifications by: Luminita C. Totu, Aalborg University */
 
 
-#include "cflie/CCrazyflie.h"
-#include "cflie/clockgettime.h"
+#include "CCrazyflie.h"
+#include "clockgettime.h"
 
 CCrazyflie::CCrazyflie(CCrazyRadio *crRadio) {
   m_crRadio = crRadio;
@@ -363,9 +363,10 @@ bool CCrazyflie::startLogging() {
   //this->enableBatteryLogging();
   //this->enableActuatorLogging();
   //this->enableMotorLogging();
-  //this->enableSMRM_rollLogging();
-
-   this->enableExtPosLogging();
+  this->enableAltitudeLogging();
+  this->enableSMRM_rollLogging();
+  this->enableSMRM_pitchLogging();
+  this->enableExtPosLogging();
   
   return true;
 }
@@ -379,7 +380,9 @@ bool CCrazyflie::stopLogging() {
   this->disableActuatorLogging();
   this->disableBatteryLogging();
   this->disableMotorLogging();
+  this->enableAltitudeLogging();
   this->disableSMRM_rollLogging();
+  this->disableSMRM_pitchLogging();
   this->disableExtPosLogging();
   return true;
 }
@@ -746,8 +749,41 @@ void CCrazyflie::disableAltimeterLogging() {
   m_tocLogs->unregisterLoggingBlock("barometer");
 }
 
+void CCrazyflie::enableAltitudeLogging() {
+	m_tocLogs->registerLoggingBlock("Altitude", 1);
+
+	m_tocLogs->startLogging("Altitude.x_hat", "Altitude");
+	m_tocLogs->startLogging("Altitude.v_hat", "Altitude");
+
+}
+
+uint32_t CCrazyflie::AltitudeTimestamp() {
+	return this->sensorTimestamp("Altitude");
+}
+
+double CCrazyflie::AltitudeLocalTimestamp() {
+	return this->sensorLocalTimestamp("Altitude");
+}
+
+bool CCrazyflie::AltitudeNewData()
+{
+	return this->sensorNewData("Altitude");
+}
+
+float CCrazyflie::AltitudeX_hat() {
+	return this->sensorDoubleValue("Altitude.x_hat");
+}
+
+float CCrazyflie::AltitudeV_hat() {
+	return this->sensorDoubleValue("Altitude.v_hat");
+}
+
+void CCrazyflie::disableAltitudeLogging() {
+	m_tocLogs->unregisterLoggingBlock("Altitude");
+}
+
 void CCrazyflie::enableSMRM_rollLogging() {
-	m_tocLogs->registerLoggingBlock("SMRM_roll", 1000);
+	m_tocLogs->registerLoggingBlock("SMRM_roll", 1);
 
 	m_tocLogs->startLogging("SMRM_roll.x_hat", "SMRM_roll");
 	m_tocLogs->startLogging("SMRM_roll.v_hat", "SMRM_roll");
@@ -787,6 +823,49 @@ float CCrazyflie::SMRM_rollOm_hat() {
 
 void CCrazyflie::disableSMRM_rollLogging() {
 	m_tocLogs->unregisterLoggingBlock("SMRM_roll");
+}
+
+void CCrazyflie::enableSMRM_pitchLogging() {
+	m_tocLogs->registerLoggingBlock("SMRM_pitch", 1);
+
+	m_tocLogs->startLogging("SMRM_pitch.x_hat", "SMRM_pitch");
+	m_tocLogs->startLogging("SMRM_pitch.v_hat", "SMRM_pitch");
+	m_tocLogs->startLogging("SMRM_pitch.th_hat", "SMRM_pitch");
+	m_tocLogs->startLogging("SMRM_pitch.om_hat", "SMRM_pitch");
+
+}
+
+uint32_t CCrazyflie::SMRM_pitchTimestamp() {
+	return this->sensorTimestamp("SMRM_pitch");
+}
+
+double CCrazyflie::SMRM_pitchLocalTimestamp() {
+	return this->sensorLocalTimestamp("SMRM_pitch");
+}
+
+bool CCrazyflie::SMRM_pitchNewData()
+{
+	return this->sensorNewData("SMRM_pitch");
+}
+
+float CCrazyflie::SMRM_pitchX_hat() {
+	return this->sensorDoubleValue("SMRM_pitch.x_hat");
+}
+
+float CCrazyflie::SMRM_pitchV_hat() {
+	return this->sensorDoubleValue("SMRM_pitch.v_hat");
+}
+
+float CCrazyflie::SMRM_pitchTh_hat() {
+	return this->sensorDoubleValue("SMRM_pitch.th_hat");
+}
+
+float CCrazyflie::SMRM_pitchOm_hat() {
+	return this->sensorDoubleValue("SMRM_pitch.om_hat");
+}
+
+void CCrazyflie::disableSMRM_pitchLogging() {
+	m_tocLogs->unregisterLoggingBlock("SMRM_pitch");
 }
 
 void CCrazyflie::enableExtPosLogging()

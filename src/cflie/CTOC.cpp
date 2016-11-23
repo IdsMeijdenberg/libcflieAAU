@@ -31,8 +31,8 @@
 /* Modifications by: Luminita C. Totu, Aalborg University */
 
 
-#include "cflie/CTOC.h"
-#include "cflie/clockgettime.h"
+#include "CTOC.h"
+#include "clockgettime.h"
 
 CTOC::CTOC(CCrazyRadio *crRadio, int nPort) {
   m_crRadio = crRadio;

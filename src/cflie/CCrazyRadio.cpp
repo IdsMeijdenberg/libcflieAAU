@@ -35,7 +35,7 @@
 	#include <chrono>
 #endif
 
-#include "cflie/CCrazyRadio.h"
+#include "CCrazyRadio.h"
 
 
 CCrazyRadio::CCrazyRadio(std::string strRadioIdentifier) {

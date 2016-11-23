@@ -161,6 +161,12 @@ class CCrazyflie {
   void enableSMRM_rollLogging();
   void disableSMRM_rollLogging();
 
+  void enableSMRM_pitchLogging();
+  void disableSMRM_pitchLogging();
+
+  void enableAltitudeLogging();
+  void disableAltitudeLogging();
+
   void enableExtPosLogging();
   void disableExtPosLogging();
 
@@ -366,6 +372,20 @@ class CCrazyflie {
   float SMRM_rollV_hat();
   float SMRM_rollTh_hat();
   float SMRM_rollOm_hat();
+
+  uint32_t SMRM_pitchTimestamp();
+  double SMRM_pitchLocalTimestamp();
+  bool SMRM_pitchNewData();
+  float SMRM_pitchX_hat();
+  float SMRM_pitchV_hat();
+  float SMRM_pitchTh_hat();
+  float SMRM_pitchOm_hat();
+
+  uint32_t AltitudeTimestamp();
+  double AltitudeLocalTimestamp();
+  bool AltitudeNewData();
+  float AltitudeX_hat();
+  float AltitudeV_hat();
   
   uint32_t extPosTimestamp();
   double extPosLocalTimestamp();
